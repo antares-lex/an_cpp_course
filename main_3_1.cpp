@@ -84,10 +84,11 @@ public:
     {
         return module_of_number() <= c.module_of_number();
     }
-    void operator+=(Complex c)
+    Complex& operator+=(Complex c)
     {
         re += c.re;
         im += c.im;
+        return *this;
     }
 
 
