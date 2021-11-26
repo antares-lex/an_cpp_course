@@ -1,31 +1,29 @@
 // Списки
 
 // 2) Реализовать односвязный список, обладающим следующим функционалом
-// -Добавление элементов в конец списка
-// -Добавление элементов в начало списка
-// -Вывод элементов списка
-// -Получение количества элементов списка
-// -Вставление элемента на указанную позицию
-// -Удаление всех элементов
-// -Удаление первого элемента списка
-// -Удаление последнего элемента списка
-// -Удаление элемента на указанной позиции
+// -Добавление элементов в конец списка+
+// -Добавление элементов в начало списка+
+// -Вывод элементов списка+
+// -Получение количества элементов списка+
+// -Вставление элемента на указанную позицию+
+// -Удаление всех элементов+
+// -Удаление первого элемента списка+
+// -Удаление последнего элемента списка+
+// -Удаление элемента на указанной позиции+
 // -Удаление элементов в диапозоне между двумя указанными позициями
 
-#include <ctime>
 #include <iostream>
 #include <string>
 using namespace std;
 
-template<class T>
 class List
 {
 	class Node
 	{
 	public:
-		T data;
+		int data;
 		Node* next;
-		Node(T t = T(), Node* n = nullptr);
+		Node(int t = int(), Node* n = nullptr);
 	};
 	Node* head;
 	int size;
@@ -33,55 +31,85 @@ class List
 public:
 	List();
 	~List();
-	void pushBack(T value);
-	void pushFront(T value);
-	int getSize() const;
-	T& operator[] (int);
-	void popFront();
-	void popBack();
-	void clear();
-	void insert(T value, int index);
-	void removeAt(int index);
-};
+	void pushBack(int value);     // -Добавление элементов в конец списка
+	void pushFront(int value);      // -Добавление элементов в начало списка
+	int getSize() const;			// -Получение количества элементов списка
+	int& operator[] (int);         // -Вывод элементов списка
+	void popFront();				// -Удаление первого элемента списка
+	void popBack();					// -Удаление последнего элемента списка
+	void clear();						// -Удаление всех элементов
+	void insert(int value, int index);	// -Вставка элемента на указанную позицию
+	void removeAt(int index);			// -Удаление элемента на указанной позиции
+	void remove_diap(int frs, int lst); // -Удаление элементов в диапозоне между двумя указанными позициями
 
-template<class T>
-void show(List<T>&);
+};
+//void show();
 
 int main()
 {
-	setlocale(0, "");
-	List<int> list;
-	for (int i = 0; i < 5; i++) list.pushBack(i);
-	show(list);
-	list.popBack();
-	list.popFront();
-	list[1] = 777;
-	show(list);
-	system("pause");
+
+	List list;
+
+	list.pushBack(987);
+	list.pushBack(111);
+	list.pushBack(222);
+	list.pushBack(333);
+	list.pushBack(444);
+	list.pushBack(555);
+
+
+	list.remove_diap(4, 3);
+
+	//list.pushFront(444);
+	//list.pushFront(555);
+	//list.pushFront(666);
+
+	//list.insert(7, 6);
+
+	// cout << list.getSize() << endl;
+
+	// list.clear();
+
+
+	// cout << list.getSize() << endl;
+	// //cout << endl;
+	for (int i = 0; i < list.getSize(); i++)
+		cout << list[i] << endl;
+
+
+
+
+	//setlocale(0, "");
+	//List list;
+	//for (int i = 0; i < 5; i++) list.pushBack(i);
+	//show();
+	//list.popBack();
+	//list.popFront();
+	//list[1] = 777;
+	//show();
+	//system("pause");
 }
 
-template <class T>
-List<T>::Node::Node(T t, Node* n)
+List::Node::Node(int t, Node* n)
 {
 	data = t;
 	next = n;
 }
 
-template<class T>
-List<T>::List()
+//template<class T>
+List::List()
 {
 	size = 0;
 	head = nullptr;
 }
 
-template<class T>
-List<T>::~List()
+//template<class T>
+List::~List()
 {
 	clear();
 }
 
-template<class T>
-void List<T>::pushBack(T value)
+void List::pushBack(int value)
 {
 	if (head == nullptr)
 		head = new Node(value);
@@ -97,21 +125,21 @@ void List<T>::pushBack(T value)
 	size++;
 }
 
-template<class T>
-void List<T>::pushFront(T value)
+//template<class T>
+void List::pushFront(int value)
 {
 	head = new Node(value, head);
 	size++;
 }
 
-template<class T>
-int List<T>::getSize() const
+//template<class T>
+int List::getSize() const
 {
 	return size;
 }
 
-template<class T>
-T& List<T>::operator[](int index)
+//template<class T>
+int& List::operator[](int index)
 {
 	if (index > size - 1 || index < 0)
 	{
@@ -125,8 +153,8 @@ T& List<T>::operator[](int index)
 	return current->data;
 }
 
-template<class T>
-void List<T>::popFront()
+//template<class T>
+void List::popFront()
 {
 	if (size <= 0) return;
 	Node* temp = head;
@@ -135,20 +163,20 @@ void List<T>::popFront()
 	size--;
 }
 
-template<class T>
-void List<T>::popBack()
+//template<class T>
+void List::popBack()
 {
 	removeAt(size - 1);
 }
 
-template<class T>
-void List<T>::clear()
+//template<class T>
+void List::clear()
 {
 	while (size) popFront();
 }
 
-template<class T>
-void List<T>::insert(T value, int index)
+//template<class T>
+void List::insert(int value, int index)
 {
 	if (index > size || index < 0)
 	{
@@ -167,8 +195,8 @@ void List<T>::insert(T value, int index)
 	}
 }
 
-template<class T>
-void List<T>::removeAt(int index)
+//template<class T>
+void List::removeAt(int index)
 {
 	if (index > size - 1 || index < 0)
 	{
@@ -189,8 +217,23 @@ void List<T>::removeAt(int index)
 	}
 }
 
-template<class T>
-void show(List<T>& list)
+void List::remove_diap(int index_f, int index_l)
+{
+	if (index_f > size || index_f < 0 || index_f > size || index_f < 0 || index_f > index_l )
+		{
+			string message = "Недопустимая комбинация индексов ";
+			throw out_of_range(message);
+		}
+	if (index_f == index_l) removeAt(index_f);
+	else
+	{
+		for (int i = 0; i <= index_l-index_f; i++)
+			removeAt(index_f);
+	}
+}
+
+//template<class T>
+void show(List& list)
 {
 	cout << "size = " << list.getSize() << endl;
 	for (int i = 0; i < list.getSize(); i++) cout << list[i] << "  ";
