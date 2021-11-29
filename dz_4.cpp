@@ -8,6 +8,7 @@
 // Методы, считающие площадь, периметр и объем(где он есть)
 
 #include <iostream>
+#include <cmath>
 #include <string>
 using namespace std;
 
@@ -15,79 +16,181 @@ class Figure
 {
 protected:
   string name;
-  string type;
+  string type;// = "Figure";
 public:
-  Figure(string name, string type)
+  Figure(string name)//, string type)
   {
     this->name = name;
-    this->type = type;
+    this->type = "Figure";
   }
   string get_name()
   {
-    return "Name of figure is: " + name;
+    return name;
   }
   string get_type()
   {
-    return "Type of figure is: " + type;;
+    return type;
   }
-   void show()
-   {
-     cout << get_name() << " " << get_type() << endl;
-   }
+  void show()
+  {
+    cout << "Name of figure is: " + get_name() << " Type of figure is: " << Figure::get_type() << endl;
+  }
 };
 
 class Square: public Figure
 {
 protected:
-    int a;
+  double a;
 public:
-  Square(string name, string type, int a):Figure(name, type)
+  Square(string name, double a):Figure(name)
   {
-      //this -> name = name;
-      //this -> type = type;
-      this -> a = a;
+    this -> a = a;
+    this -> type = "Square";
   }
-    int get_square()
-    {
-        return a * a;
-    }
-    int get_perimeter()
-    {
-        return 4 * a;
-    }
+  double get_square()
+  {
+    return a * a;
+  }
+  double get_perimeter()
+  {
+    return 4 * a;
+  }
 };
 
 class Rectangle: public Square
 {
-private:
-    int b;
+protected:
+  double b;
 public:
-  Rectangle(string name, string type, int a, int b):Square(name, type, a)
+  Rectangle(string name, double a, double b):Square(name, a)
   {
-      this -> b = b;
+    this -> b = b;
+    this -> type = "Rectangle";
   }
-    int get_square()
-    {
-        return a * b;
-    }
-    int get_perimeter()
-    {
-        return 2*a + 2*b;
-    }
+  double get_square()
+  {
+    return a * b;
+  }
+  double get_perimeter()
+  {
+    return 2*a + 2*b;
+  }
 };
+
+class Triangle: public Rectangle
+{
+protected:
+  double c;
+public:
+  Triangle(string name, double a, double b, double c):Rectangle(name, a, b)
+  {
+    this -> c = c;
+    this -> type = "Triangle";
+  }
+  double get_square()
+  {
+    double p = (a + b + c) / 2;
+    return sqrt(p * (p - a) * (p - b) * (p - c));
+  }
+  double get_perimeter()
+  {
+    return a + b + c;
+  }
+};
+
+class Circle: public Figure
+{
+protected:
+const double pi = 3.14;
+    double r;
+public:
+  Circle(string name, double r):Figure(name)
+  {
+    this -> r = r;
+    this -> type = "Circle";
+  }
+  double get_square()
+  {
+    return pi*r*r;
+  }
+  double get_perimeter()
+  {
+    return 2*pi*r;
+  }
+};
+
+class Cube: public Square
+{
+public:
+  Cube(string name, double a):Square(name, a)
+  {
+    this -> type = "Cube";
+  }
+  double get_square()
+  {
+    return Square::get_square() * 6;
+  }
+  double get_perimeter()
+  {
+    return 12 * a;
+  }
+  double get_volume()
+  {
+    return a * a * a;
+  }
+};
+
+class Sphere: public Circle
+{
+public:
+  Sphere(string name, double r):Circle(name, r)
+  {
+    this -> type = "Sphere";
+  }
+  double get_square()
+  {
+    return 4 * Circle::get_square();
+  }
+  double get_volume()
+  {
+    return get_square() * r / 3;
+  }
+ };
+
 
 
 int main()
 {
-    Square Kvadrat("Первая фигура", "Квадрат", 3);
+    Square Kvadrat("Первая фигура", 20);
     cout << Kvadrat.get_square() << endl;
     cout << Kvadrat.get_perimeter() << endl;
     Kvadrat.show();
 
-    Rectangle Pr("Вторая фигура", "Прямоугольник", 3, 2);
+    Rectangle Pr("Вторая фигура", 3, 2);
     cout << Pr.get_square() << endl;
     cout << Pr.get_perimeter() << endl;
     Pr.show();
+
+    Triangle Tr("Третья фигура", 1, 1, 1);
+    cout << Tr.get_square() << endl;
+    cout << Tr.get_perimeter() << endl;
+    Tr.show();
+
+    Circle Kr("Четвертая фигура", 1);
+    cout << Kr.get_square() << endl;
+    cout << Kr.get_perimeter() << endl;
+    Kr.show();
+
+    Cube Cub("Пятая фигура", 2);
+    cout << Cub.get_square() << endl;
+    cout << Cub.get_perimeter() << endl;
+    cout << Cub.get_volume() << endl;
+    Cub.show();
+
+    Sphere Shar("Шестая фигура", 1);
+    cout << Shar.get_square() << endl;
+    cout << Shar.get_volume() << endl;
+    Shar.show();
 
 
 //   int marks[3]{ 5,4,5 };
@@ -100,112 +203,3 @@ int main()
 //   t.is_good();
 }
 
-
-
-
-
-
-// class Human
-// {
-// protected:
-//   string name;
-//   float age;
-// public:
-//   Human(string name, float age)
-//   {
-//     this->name = name;
-//     this->age = age;
-//   }
-//   string get_name()
-//   {
-//     return "My name is: " + name;
-//   }
-//   float get_age()
-//   {
-//     return age;
-//   }
-//   void is_good()
-//   {
-//     cout << "My name is: " << name << ". " << "My age is: " << age << endl;
-//   }
-// };
-// class Student: public Human
-// {
-// private:
-//   static const int max_size = 10;
-//   int marks[max_size];
-//   int number_of_marks = 0;
-// public:
-//   Student(string name, float age, int marks[], int n):Human(name, age)
-//   {
-//     for (int i = 0; i < n; i++)
-//     {
-//       this->marks[i] = marks[i];
-//     }
-//     number_of_marks = n;
-//   }
-//   void get_marks()
-//   {
-//     for (int i = 0; i < number_of_marks; i++)
-//     {
-//       cout << marks[i] << " ";
-//       cout << endl;
-//     }
-//   }
-//   void is_good()
-//   {
-//     Human::is_good();
-//     float res = 0;
-//     for (int i = 0; i < number_of_marks; i++)
-//     {
-//       res += marks[i];
-//     }
-//     res /= number_of_marks;
-
-//     if (res >= 4)
-//     {
-//       cout << "I'm a good student" << endl;
-//     }
-//     else
-//     {
-//       cout << "I'm a bad student" << endl;
-//     }
-//   }
-// };
-// class Teacher : public Human
-// {
-// private:
-//   int number_of_publications;
-// public:
-//   Teacher(string name, float age, int number_of_publications):Human(name, age)
-//   {
-//     this->number_of_publications = number_of_publications;
-//   }
-//   int get_number_of_publications()
-//   {
-//     return number_of_publications;
-//   }
-//   void is_good()
-//   {
-//     Human::is_good();
-//     if (number_of_publications >= 5)
-//     {
-//       cout << "I'm a good teacher" << endl;
-//     }
-//     else
-//     {
-//       cout << "I'm a bad teacher" << endl;
-//     }
-//   }
-// };
-// int main()
-// {
-//   int marks[3]{ 5,4,5 };
-//   Student s("Jack", 23, marks, 3);
-//   Teacher t("Tom", 43, 3);
-//   //cout << s.get_name() << " " << s.get_age() << endl;
-//   //s.get_marks();
-//   //cout << t.get_name() << " " << t.get_age() <<" "<< t.get_number_of_publications()<<endl;
-//   s.is_good();
-//   t.is_good();
-// }
