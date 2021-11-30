@@ -1,0 +1,2 @@
+Фигура(ы) с самой большой площадью: 
+Name of figure is: г  Type of figure is: Square Area of figure is: 81
