@@ -122,5 +122,9 @@ public:
 
 int main()
 {
+    fract_num a = fract_num(2,3);
+    fract_num b = fract_num(3,3);
+    bool c = (a == b);
+    cout << c << endl;;
 
 }

@@ -12,7 +12,7 @@ int main()
     int max_number_shapes = 0;
     cout << "Введите количество фигур: "; 
     cin >> max_number_shapes;
-    Figure* shapes[max_number_shapes];
+    Figure* shapes[100];
     int current_number = 0;
     const int number_of_names = 7;
     string names[number_of_names]{ "Red", "Black", "Blue", "Green", "White", "Yellow", "Grey"};
