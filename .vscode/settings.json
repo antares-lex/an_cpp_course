@@ -9,6 +9,11 @@
         "iosfwd": "cpp",
         "*.tcc": "cpp",
         "cstddef": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "initializer_list": "cpp",
+        "utility": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp"
     }
 }
