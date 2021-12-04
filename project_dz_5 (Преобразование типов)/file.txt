@@ -1,0 +1,2 @@
+The figure(s) with the largest area: 
+Name of figure is: Red  Type of figure is: Sphere Area of figure is: 113.04

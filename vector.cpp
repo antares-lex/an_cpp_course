@@ -49,7 +49,7 @@ int main()
 	//	cout << *i << " ";
 	//}
 
-	v.erase(v.begin(), v.begin() + 8);
+	//v.erase(v.begin(), v.begin() + 8);
 
 
 	for (auto i = v.begin(); i != v.end(); i++)
@@ -57,9 +57,20 @@ int main()
 		cout << *i << " ";
 	}
 
-
-
     cout << endl;
+
+	cout << v.capacity() << endl;
+
+	v.reserve(20);
+
+	cout << v.capacity() << endl;
+
+	v.shrink_to_fit();
+
+	cout << v.capacity() << endl;
+	
+	// shrink_to_fit()
+
 	// cout << v.resize();
 
 	// vector<int>::iterator pA;

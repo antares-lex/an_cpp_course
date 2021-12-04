@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
     int max_number_shapes = 0;
-    cout << "Введите количество фигур: "; 
+    cout << "Enter the number of shapes"; 
     cin >> max_number_shapes;
     Figure* shapes[100];
     int current_number = 0;
@@ -26,7 +26,7 @@ int main()
         if (types[type] == "Square")
         {
             Square* shapes_1;
-            shapes_1 = new Square(names[rand() % number_of_names], 2);// 1 + rand() % 9);
+            shapes_1 = new Square(names[rand() % number_of_names], 2);
             cin >> shapes_1;
             shapes[current_number] = shapes_1;
         }
@@ -55,14 +55,9 @@ int main()
     if (shapes[current_number]->get_square() > max_square)
         max_square = shapes[current_number]->get_square();
   }
-  
-  cout << "Максимальная площадь равна " << max_square << endl;
-  cout << "______________________________________________"<< endl;
   current_number = 0;
-
   ofstream out("file.txt");
-  
-  out << "Фигура(ы) с самой большой площадью: " << endl;
+  out << "The figure(s) with the largest area: " << endl;
   for(int i= 0; i< max_number_shapes;i++)
   {
     current_number++;
